@@ -10,3 +10,6 @@ pids
 # IDE #
 .idea/
 *.swp
+
+# deps
+node_modules
