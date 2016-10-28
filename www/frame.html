@@ -1,10 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
+    <title>Iframe</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- base url -->
+    <base href="./">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            padding: 10px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        @media (max-width: 200px) {
+            body {
+                padding: 20px;
+                background: blue;
+                color: white;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            p {
+                text-align: left;
+                font-size: 10px;
+            }
+        }
+
+        @media (min-width: 201px) {
+            body {
+                background: green;
+                color: red;
+            }
+
+            h1 {
+                text-align: left;
+            }
+
+            p {
+                text-align: justify;
+
+            }
+        }
+    </style>
+
 </head>
+
 <body>
+
+<div id="container">
+    <h1>Responsive example</h1>
+
+    <p>
+        Media Queries is a CSS3 module allowing content rendering to adapt to conditions such as screen resolution (e.g.
+        smartphone screen vs. computer screen). It became a W3C recommended standard in June 2012, and is a cornerstone
+        technology of Responsive web design.
+    </p>
+</div>
 
 </body>
 </html>
