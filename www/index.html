@@ -12,12 +12,34 @@
     <base href="./">
 
     <style>
-        #container {
-
+        * {
+            margin: 0;
+            padding: 0;
         }
-        #frame{
-            width:200px;
-            height:200px;
+
+        #container {
+            padding: 25px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        #toggle {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 5px;
+            background: black;
+            color: white;
+            border: none;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        #frame {
+            width: 200px;
+            height: 200px;
+            display: block;
+            margin: 0 auto;
         }
     </style>
 
@@ -26,41 +48,37 @@
 <body>
 
 <div id="container">
-    <button id="toggle">Toggle size of iframe</button>
+    <p>
+        <button id="toggle" onclick="toggleFrame()">Toggle size of iframe</button>
+    </p>
+
     <iframe id="frame" src="frame.html"></iframe>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script src="">
+<script>
 
     var widgetSize = {
-        width: '200px',
-        height: '200px'
+        width: '100px',
+        height: '100px'
     };
     var fullSize = {
-        height: '100%',
-        width: '100%'
+        height: '500px',
+        width: '500px'
     };
-    fullFrame = false;
+    var fullFrame = false;
+    var frame = document.getElementById('frame');
 
-    $(document).ready(function(){
-
-        function toggleFrame(e){
-
-            var toggleSize = fullSize;
-            if(fullFrame){
-                toggleSize = widgetSize;
-            }
-            fullFrame = !fullFrame;
-            $('#frame').css(toggleSize);
-
-            e.preventDefault();
-
+    function toggleFrame() {
+        var toggleSize = fullSize;
+        if (fullFrame) {
+            toggleSize = widgetSize;
         }
+        fullFrame = !fullFrame;
+        frame.style.height = toggleSize.height;
+        frame.style.width = toggleSize.width;
+    }
 
-        $('#toggle').click(toggleFrame);
-
-    });
 </script>
+
 </body>
 </html>

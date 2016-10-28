@@ -11,10 +11,12 @@ let mainWindow;
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 1200, height: 500});
+  mainWindow = new BrowserWindow();
+  mainWindow.maximize();
+  mainWindow.webContents.openDevTools();
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://');
+  mainWindow.loadURL('file://' + dirname  + '/www/index.html');
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools({mode: 'detach'});
