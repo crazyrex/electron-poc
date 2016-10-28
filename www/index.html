@@ -38,10 +38,28 @@
 
         #frame {
             width: 200px;
-            height: 200px;
+            height: 300px;
             display: block;
             margin: 0 auto;
         }
+
+        #seperateurls {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        hr {
+            margin-bottom: 15px;
+        }
+
+        #seperateurls p {
+            margin: 0 0 10px 0;
+        }
+
+        #seperateurls input {
+            padding: 3px 5px;
+        }
+
     </style>
 
 </head>
@@ -49,34 +67,79 @@
 <body>
 
 <div id="container">
+
+    <h4>Use case settings:</h4>
+    <div id="seperateurls">
+        <p>
+            <input type="checkbox" id="usetwourls" onclick="toggleCase()"/>&nbsp;
+            <label for="usetwourls">Use 2 seperate urls per frame size</label>
+        </p>
+        <p>
+            <label for="usetwourls">Small frame url:</label> <input type="text" id="urlsmall" value="http://samvloeberghs.be"/>
+        </p>
+        <p>
+            <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="http://ng-be.org">
+        </p>
+    </div>
+
+    <hr/>
+
     <p>
         <button id="toggle" onclick="toggleFrame()">Toggle size of iframe</button>
     </p>
 
     <iframe id="frame" src="frame.html"></iframe>
+
 </div>
 
 <script>
 
     var widgetSize = {
         width: '200px',
-        height: '200px'
+        height: '300px'
     };
     var fullSize = {
         height: '500px',
         width: '500px'
     };
+    var frameUrl = 'frame.html';
     var fullFrame = false;
+    var seperateUrls = false;
     var frame = document.getElementById('frame');
+
+    function toggleCase(){
+        seperateUrls = !seperateUrls;
+        if(!seperateUrls){
+            frame.src = frameUrl;
+        }
+    }
 
     function toggleFrame() {
         var toggleSize = fullSize;
         if (fullFrame) {
             toggleSize = widgetSize;
         }
+
+        if(seperateUrls){
+            loadCorrectUrl();
+        }
+
         fullFrame = !fullFrame;
         frame.style.height = toggleSize.height;
         frame.style.width = toggleSize.width;
+
+    }
+
+    function loadCorrectUrl(){
+        var urlSmall = document.getElementById('urlsmall').value;
+        var urlBig = document.getElementById('urlbig').value;
+
+        console.log(urlSmall, urlBig);
+        var toLoadUrl = urlBig;
+        if(!fullFrame){
+            toLoadUrl = urlSmall;
+        }
+        frame.src = toLoadUrl;
     }
 
 </script>
