@@ -1,0 +1,27 @@
+{
+  "name": "electron-iframe-resize-example",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Sam Vloeberghs <sam@kwerri.be>",
+  "main": "main.js",
+  "homepage": "https://github.com/samvloeberghs/electron-iframe-resize-example",
+  "license": "MIT",
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "electron": "^1.4.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samvloeberghs/electron-iframe-resize-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samvloeberghs/electron-iframe-resize-example/issues"
+  },
+  "engines": {
+    "node": ">= 4.2.1",
+    "npm": ">= 3"
+  }
+}

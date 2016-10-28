@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+
+    <title>Electron iframe example</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- base url -->
+    <base href="./">
+
+    <style>
+        #container {
+
+        }
+        #frame{
+            width:200px;
+            height:200px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div id="container">
+    <button id="toggle">Toggle size of iframe</button>
+    <iframe id="frame" src="frame.html"></iframe>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="">
+
+    var widgetSize = {
+        width: '200px',
+        height: '200px'
+    };
+    var fullSize = {
+        height: '100%',
+        width: '100%'
+    };
+    fullFrame = false;
+
+    $(document).ready(function(){
+
+        function toggleFrame(e){
+
+            var toggleSize = fullSize;
+            if(fullFrame){
+                toggleSize = widgetSize;
+            }
+            fullFrame = !fullFrame;
+            $('#frame').css(toggleSize);
+
+            e.preventDefault();
+
+        }
+
+        $('#toggle').click(toggleFrame);
+
+    });
+</script>
+</body>
+</html>
