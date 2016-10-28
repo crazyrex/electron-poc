@@ -7,6 +7,7 @@
   "homepage": "https://github.com/samvloeberghs/electron-iframe-resize-example",
   "license": "MIT",
   "scripts": {
+    "package": "electron-packager . --out=packages/"
   },
   "dependencies": {
   },
