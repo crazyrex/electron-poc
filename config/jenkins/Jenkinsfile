@@ -2,7 +2,7 @@ try {
     node('BGC-BE-TEST63CD') {
         deleteDir()
         dir('project'){
-            git credentialsId: '56e6dec6-558f-40a8-8d81-23bff8ebb509', url: 'git@el2604.bc:FOT-Official/fot.git'
+            git credentialsId: '56e6dec6-558f-40a8-8d81-23bff8ebb509', url: 'git@el2604.bc:FOT-Official/electron-poc.git'
             withEnv(["PATH+NODE=/msservice/app/node/bin","HTTPS_PROXY=http://el2604:8080","HTTP_PROXY=http://el2604:8080"]) {
 
                 stage 'build & package'
