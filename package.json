@@ -7,12 +7,12 @@
   "homepage": "https://github.com/samvloeberghs/electron-iframe-resize-example",
   "license": "MIT",
   "scripts": {
-    "package": "electron-packager . --out=packages/"
+    "package": "rimraf packages && electron-packager . --out=packages/"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "electron": "^1.4.3"
+    "electron": "^1.4.3",
+    "rimraf": "^2.5.4"
   },
   "repository": {
     "type": "git",
