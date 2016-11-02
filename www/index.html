@@ -30,6 +30,7 @@
 
         .column {
             width: 300px;
+            margin-right: 20px;
         }
 
         .button {
@@ -58,7 +59,7 @@
         }
 
         #frame {
-            width: 200px;
+            width: 100%;
             height: 200px;
             display: block;
             margin: 0 auto;
@@ -118,7 +119,13 @@
             </textarea>
         </div>
         <div class="column">
-
+            <h4>Element selection / manipulation</h4>
+            <br/>
+            <p>In this case the textarea in the iframe has a custom attribute: "fot-msg-textbox" which we use to select the element.</p>
+            <br />
+            <button id="manipulateinchild" class="button" onclick="manipulateElementInChild()">
+                Manipulate element in dom of child
+            </button>
         </div>
     </div>
 
@@ -143,7 +150,7 @@
         width: '100%'
     };
     var frameUrl = 'frame.html';
-    var fullFrame = false;
+    var fullFrame = true;
     var seperateUrls = false;
     var frame = document.getElementById('frame');
     var childMessageBox = document.getElementById('receivedmsgchild');
@@ -191,7 +198,14 @@
     }
 
     function sendMessageToChild() {
-        frame.contentWindow.postMessage('hello child!!' + Math.random(1,999), '*');
+        frame.contentWindow.postMessage('hello child!!' + Math.random(1, 999), '*');
+    }
+
+    function manipulateElementInChild() {
+        var el = frame.contentWindow.document.querySelectorAll('[fot-msg-textbox]')[0];
+        if(confirm('Confirm that I can clear this value: "' + el.textContent + '" from the textbox')){
+            el.textContent = '';
+        }
     }
 
 </script>
