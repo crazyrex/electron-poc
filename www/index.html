@@ -18,29 +18,56 @@
             font-family: Arial, sans-serif;
         }
 
+        *:focus {
+            outline-color: pink;
+        }
+
         #container {
             padding: 25px;
             box-sizing: border-box;
             width: 100%;
         }
 
-        #toggle {
-            width: 100%;
+        .columns {
+            display: flex;
+        }
+
+        .column {
+            width: 300px;
+            margin-right: 20px;
+        }
+
+        .button {
             box-sizing: border-box;
             padding: 10px 5px;
             background: black;
             color: white;
             border: none;
             text-transform: uppercase;
-            margin-bottom: 20px;
             cursor: pointer;
         }
 
+        #toggle {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #sendtochild {
+            margin-bottom: 5px;
+        }
+
+        #receivedmsgchild {
+            width: 300px;
+            height: 65px;
+            margin-bottom: 10px;
+        }
+
         #frame {
-            width: 200px;
-            height: 300px;
+            width: 100%;
+            height: 200px;
             display: block;
             margin: 0 auto;
+            border: 5px solid #eee;
         }
 
         #seperateurls {
@@ -68,24 +95,48 @@
 
 <div id="container">
 
-    <h4>Use case settings:</h4>
-    <div id="seperateurls">
-        <p>
-            <input type="checkbox" id="usetwourls" onclick="toggleCase()"/>&nbsp;
-            <label for="usetwourls">Use 2 seperate urls per frame size</label>
-        </p>
-        <p>
-            <label for="usetwourls">Small frame url:</label> <input type="text" id="urlsmall" value="http://samvloeberghs.be"/>
-        </p>
-        <p>
-            <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="http://ng-be.org">
-        </p>
+    <div class="columns">
+        <div class="column">
+            <h4>Use case settings:</h4>
+            <div id="seperateurls">
+                <p>
+                    <input type="checkbox" id="usetwourls" onclick="toggleCase()"/>&nbsp;
+                    <label for="usetwourls">Use 2 seperate urls per frame size</label>
+                </p>
+                <p>
+                    <label for="usetwourls">Small frame url:</label>
+                    <input type="text" id="urlsmall" value="http://samvloeberghs.be"/>
+                </p>
+                <p>
+                    <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="http://ng-be.org">
+                </p>
+            </div>
+        </div>
+        <div class="column">
+            <h4>Parent / child communication:</h4>
+            <button id="sendtochild" class="button" onclick="sendMessageToChild()">
+                Send some message to child
+            </button>
+            <p>Received messages from child:</p>
+            <textarea readonly id="receivedmsgchild">
+
+            </textarea>
+        </div>
+        <div class="column">
+            <h4>Element selection / manipulation</h4>
+            <br/>
+            <p>In this case the textarea in the iframe has a custom attribute: "fot-msg-textbox" which we use to select the element.</p>
+            <br />
+            <button id="manipulateinchild" class="button" onclick="manipulateElementInChild()">
+                Manipulate element in dom of child
+            </button>
+        </div>
     </div>
 
     <hr/>
 
     <p>
-        <button id="toggle" onclick="toggleFrame()">Toggle size of iframe</button>
+        <button id="toggle" class="button" onclick="toggleFrame()">Toggle size of iframe</button>
     </p>
 
     <iframe id="frame" src="frame.html"></iframe>
@@ -96,20 +147,21 @@
 
     var widgetSize = {
         width: '200px',
-        height: '300px'
+        height: '200px'
     };
     var fullSize = {
-        height: '500px',
-        width: '500px'
+        height: '200px',
+        width: '100%'
     };
     var frameUrl = 'frame.html';
-    var fullFrame = false;
+    var fullFrame = true;
     var seperateUrls = false;
     var frame = document.getElementById('frame');
+    var childMessageBox = document.getElementById('receivedmsgchild');
 
-    function toggleCase(){
+    function toggleCase() {
         seperateUrls = !seperateUrls;
-        if(!seperateUrls){
+        if (!seperateUrls) {
             frame.src = frameUrl;
         }
     }
@@ -120,7 +172,7 @@
             toggleSize = widgetSize;
         }
 
-        if(seperateUrls){
+        if (seperateUrls) {
             loadCorrectUrl();
         }
 
@@ -130,16 +182,34 @@
 
     }
 
-    function loadCorrectUrl(){
+    function loadCorrectUrl() {
         var urlSmall = document.getElementById('urlsmall').value;
         var urlBig = document.getElementById('urlbig').value;
 
         console.log(urlSmall, urlBig);
         var toLoadUrl = urlBig;
-        if(!fullFrame){
+        if (!fullFrame) {
             toLoadUrl = urlSmall;
         }
         frame.src = toLoadUrl;
+    }
+
+
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(event) {
+        childMessageBox.textContent = event.data;
+    }
+
+    function sendMessageToChild() {
+        frame.contentWindow.postMessage('hello child!!' + Math.random(1, 999), '*');
+    }
+
+    function manipulateElementInChild() {
+        var el = frame.contentWindow.document.querySelectorAll('[fot-msg-textbox]')[0];
+        if(confirm('Confirm that I can clear this value: "' + el.textContent + '" from the textbox')){
+            el.textContent = '';
+        }
     }
 
 </script>

@@ -13,7 +13,9 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow();
   mainWindow.maximize();
-  mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools({
+    mode: 'bottom'
+  });
 
   // and load the index.html of the app.
   mainWindow.loadURL('file://' + dirname  + '/www/index.html');

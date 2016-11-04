@@ -18,6 +18,10 @@
             font-family: Arial, sans-serif;
         }
 
+        *:focus {
+            outline-color: blue;
+        }
+
         #container {
             padding: 10px;
             box-sizing: border-box;
@@ -31,6 +35,20 @@
 
         p {
             font-size: 14px;
+        }
+
+        a {
+            color: #fff;
+        }
+
+        .button {
+            box-sizing: border-box;
+            padding: 10px 5px;
+            background: black;
+            color: white;
+            border: none;
+            text-transform: uppercase;
+            cursor: pointer;
         }
 
         @media (max-width: 200px) {
@@ -62,8 +80,13 @@
 
             p {
                 text-align: justify;
-
             }
+
+            #receivedmsgparent {
+                width: 100%;
+                height: 50px;
+            }
+
         }
     </style>
 
@@ -74,12 +97,33 @@
 <div id="container">
     <h1>Responsive example</h1>
 
+    <textarea readonly id="receivedmsgparent" fot-msg-textbox></textarea>
+    <button id="sendtoparent" class="button" onclick="sendMessageToParent()">Send some message to parent</button>
+
     <p>
         Media Queries is a CSS3 module allowing content rendering to adapt to conditions such as screen resolution (e.g.
         smartphone screen vs. computer screen). It became a W3C recommended standard in June 2012, and is a cornerstone
         technology of Responsive web design.
     </p>
+
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
 </div>
 
+<script>
+
+    var parentMessageBox = document.getElementById('receivedmsgparent');
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(event) {
+        parentMessageBox.textContent = event.data;
+    }
+
+    function sendMessageToParent() {
+        window.parent.postMessage('hello parent!!' + Math.random(1, 999), '*');
+    }
+
+</script>
 </body>
 </html>
