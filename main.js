@@ -13,6 +13,7 @@ function createWindow () {
   // configure SSO
   electron.session.defaultSession.allowNTLMCredentialsForDomains('*');
 
+
   // Create the browser window.
   mainWindow = new BrowserWindow();
   mainWindow.maximize();
@@ -21,6 +22,7 @@ function createWindow () {
   });
 
   // and load the index.html of the app.
+  // electron.session.defaultSession.allowNTLMCredentialsForDomains('*');
   mainWindow.loadURL('file://' + dirname  + '/www/index.html');
 
   // Open the DevTools.

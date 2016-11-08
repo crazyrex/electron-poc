@@ -105,10 +105,10 @@
                 </p>
                 <p>
                     <label for="usetwourls">Small frame url:</label>
-                    <input type="text" id="urlsmall" value="http://samvloeberghs.be"/>
+                    <input type="text" id="urlsmall" value="https://intra.web.bc"/>
                 </p>
                 <p>
-                    <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="http://ng-be.org">
+                    <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="https://intra.web.bc/REE">
                 </p>
             </div>
         </div>
@@ -139,12 +139,11 @@
         <button id="toggle" class="button" onclick="toggleFrame()">Toggle size of iframe</button>
     </p>
 
-    <iframe id="frame" src="frame.html"></iframe>
+    <webview id="frame" src="frame.html" style="display:inline-flex; width:100%; height:200px" partition="persist:default"></webview>
 
 </div>
 
 <script>
-
     var widgetSize = {
         width: '200px',
         height: '200px'
