@@ -105,10 +105,10 @@
                 </p>
                 <p>
                     <label for="usetwourls">Small frame url:</label>
-                    <input type="text" id="urlsmall" value="http://samvloeberghs.be"/>
+                    <input type="text" id="urlsmall" value="https:/ng-be.org"/>
                 </p>
                 <p>
-                    <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="http://ng-be.org">
+                    <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="http://intra.web.bc">
                 </p>
             </div>
         </div>
@@ -188,7 +188,7 @@
 
         console.log(urlSmall, urlBig);
         var toLoadUrl = urlBig;
-        if (!fullFrame) {
+        if (fullFrame) {
             toLoadUrl = urlSmall;
         }
         frame.src = toLoadUrl;
