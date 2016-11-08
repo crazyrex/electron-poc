@@ -10,6 +10,9 @@ const dirname = __dirname;
 let mainWindow;
 
 function createWindow () {
+  // configure SSO
+  electron.session.defaultSession.allowNTLMCredentialsForDomains('*');
+
   // Create the browser window.
   mainWindow = new BrowserWindow();
   mainWindow.maximize();
