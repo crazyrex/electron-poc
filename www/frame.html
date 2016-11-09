@@ -111,19 +111,25 @@
     <a href="#">Link 3</a>
 </div>
 
-<script>
+<script defer>
+  var electron = require('electron');
+  var ipc = electron.ipcRenderer;
 
-    var parentMessageBox = document.getElementById('receivedmsgparent');
-    window.addEventListener("message", receiveMessage, false);
 
-    function receiveMessage(event) {
-        parentMessageBox.textContent = event.data;
-    }
+
+  var parentMessageBox = document.getElementById('receivedmsgparent');
+  window.addEventListener("message", receiveMessage, false);
 
     function sendMessageToParent() {
-        window.parent.postMessage('hello parent!!' + Math.random(1, 999), '*');
+//        window.top.postMessage('hello parent!!' + Math.random(1, 999), '*');
+      ipc.send('message', 'to parent ' + Math.random(1, 999));
     }
 
+  function receiveMessage(event,data) {
+    parentMessageBox.textContent = data;
+  }
+
+  ipc.on('fromMain', receiveMessage  );
 </script>
 </body>
 </html>

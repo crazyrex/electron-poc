@@ -1,6 +1,7 @@
 const electron = require('electron');
 // Module to control application life.
 const app = electron.app;
+const ipc = electron.ipcMain;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 const dirname = __dirname;
@@ -8,6 +9,7 @@ const dirname = __dirname;
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
 
 function createWindow () {
   // configure SSO
@@ -20,6 +22,14 @@ function createWindow () {
   mainWindow.webContents.openDevTools({
     mode: 'bottom'
   });
+
+  ipc.on('message', (evt,data) => {
+    console.log('message', data)
+
+  mainWindow.webContents.send('broadcast',data);
+  mainWindow.send('send',data);
+
+});
 
   // and load the index.html of the app.
   // electron.session.defaultSession.allowNTLMCredentialsForDomains('*');

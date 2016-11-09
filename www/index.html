@@ -2,92 +2,92 @@
 <html lang="">
 <head>
 
-    <title>Electron iframe example</title>
+  <title>Electron iframe example</title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- base url -->
-    <base href="./">
+  <!-- base url -->
+  <base href="./">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
 
-        *:focus {
-            outline-color: pink;
-        }
+    *:focus {
+      outline-color: pink;
+    }
 
-        #container {
-            padding: 25px;
-            box-sizing: border-box;
-            width: 100%;
-        }
+    #container {
+      padding: 25px;
+      box-sizing: border-box;
+      width: 100%;
+    }
 
-        .columns {
-            display: flex;
-        }
+    .columns {
+      display: flex;
+    }
 
-        .column {
-            width: 300px;
-            margin-right: 20px;
-        }
+    .column {
+      width: 300px;
+      margin-right: 20px;
+    }
 
-        .button {
-            box-sizing: border-box;
-            padding: 10px 5px;
-            background: black;
-            color: white;
-            border: none;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
+    .button {
+      box-sizing: border-box;
+      padding: 10px 5px;
+      background: black;
+      color: white;
+      border: none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
 
-        #toggle {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+    #toggle {
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
-        #sendtochild {
-            margin-bottom: 5px;
-        }
+    #sendtochild {
+      margin-bottom: 5px;
+    }
 
-        #receivedmsgchild {
-            width: 300px;
-            height: 65px;
-            margin-bottom: 10px;
-        }
+    #receivedmsgchild {
+      width: 300px;
+      height: 65px;
+      margin-bottom: 10px;
+    }
 
-        #frame {
-            width: 100%;
-            height: 200px;
-            display: block;
-            margin: 0 auto;
-            border: 5px solid #eee;
-        }
+    #frame {
+      width: 100%;
+      height: 200px;
+      display: block;
+      margin: 0 auto;
+      border: 5px solid #eee;
+    }
 
-        #seperateurls {
-            margin-top: 15px;
-            margin-bottom: 15px;
-        }
+    #seperateurls {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
 
-        hr {
-            margin-bottom: 15px;
-        }
+    hr {
+      margin-bottom: 15px;
+    }
 
-        #seperateurls p {
-            margin: 0 0 10px 0;
-        }
+    #seperateurls p {
+      margin: 0 0 10px 0;
+    }
 
-        #seperateurls input {
-            padding: 3px 5px;
-        }
+    #seperateurls input {
+      padding: 3px 5px;
+    }
 
-    </style>
+  </style>
 
 </head>
 
@@ -95,121 +95,127 @@
 
 <div id="container">
 
-    <div class="columns">
-        <div class="column">
-            <h4>Use case settings:</h4>
-            <div id="seperateurls">
-                <p>
-                    <input type="checkbox" id="usetwourls" onclick="toggleCase()"/>&nbsp;
-                    <label for="usetwourls">Use 2 seperate urls per frame size</label>
-                </p>
-                <p>
-                    <label for="usetwourls">Small frame url:</label>
-                    <input type="text" id="urlsmall" value="https://intra.web.bc"/>
-                </p>
-                <p>
-                    <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="https://intra.web.bc/REE">
-                </p>
-            </div>
-        </div>
-        <div class="column">
-            <h4>Parent / child communication:</h4>
-            <button id="sendtochild" class="button" onclick="sendMessageToChild()">
-                Send some message to child
-            </button>
-            <p>Received messages from child:</p>
-            <textarea readonly id="receivedmsgchild">
+  <div class="columns">
+    <div class="column">
+      <h4>Use case settings:</h4>
+      <div id="seperateurls">
+        <p>
+          <input type="checkbox" id="usetwourls" onclick="toggleCase()"/>&nbsp;
+          <label for="usetwourls">Use 2 seperate urls per frame size</label>
+        </p>
+        <p>
+          <label for="usetwourls">Small frame url:</label>
+          <input type="text" id="urlsmall" value="https://ng-be.org"/>
+        </p>
+        <p>
+          <label for="urlbig">Big frame url:</label> <input type="text" id="urlbig" value="http://intra.web.bc">
+        </p>
+      </div>
+    </div>
+    <div class="column">
+      <h4>Parent / child communication:</h4>
+      <button id="sendtochild" class="button" onclick="sendMessageToChild()">
+        Send some message to child
+      </button>
+      <p>Received messages from child:</p>
+      <textarea readonly id="receivedmsgchild">
 
             </textarea>
-        </div>
-        <div class="column">
-            <h4>Element selection / manipulation</h4>
-            <br/>
-            <p>In this case the textarea in the iframe has a custom attribute: "fot-msg-textbox" which we use to select the element.</p>
-            <br />
-            <button id="manipulateinchild" class="button" onclick="manipulateElementInChild()">
-                Manipulate element in dom of child
-            </button>
-        </div>
     </div>
+    <div class="column">
+      <h4>Element selection / manipulation</h4>
+      <br/>
+      <p>In this case the textarea in the iframe has a custom attribute: "fot-msg-textbox" which we use to select the
+        element.</p>
+      <br/>
+      <button id="manipulateinchild" class="button" onclick="manipulateElementInChild()">
+        Manipulate element in dom of child
+      </button>
+    </div>
+  </div>
 
-    <hr/>
+  <hr/>
 
-    <p>
-        <button id="toggle" class="button" onclick="toggleFrame()">Toggle size of iframe</button>
-    </p>
+  <p>
+    <button id="toggle" class="button" onclick="toggleFrame()">Toggle size of iframe</button>
+  </p>
 
-    <webview id="frame" src="frame.html" style="display:inline-flex; width:100%; height:200px" partition="persist:default"></webview>
+  <webview id="frame" src="frame.html" style="display:inline-flex; width:100%; height:200px"
+           partition="persist:default"
+           nodeintegration></webview>
 
 </div>
 
-<script>
-    var widgetSize = {
-        width: '200px',
-        height: '200px'
-    };
-    var fullSize = {
-        height: '200px',
-        width: '100%'
-    };
-    var frameUrl = 'frame.html';
-    var fullFrame = true;
-    var seperateUrls = false;
-    var frame = document.getElementById('frame');
-    var childMessageBox = document.getElementById('receivedmsgchild');
+<script defer>
+  var electron = require('electron');
+  var ipc = electron.ipcRenderer;
 
-    function toggleCase() {
-        seperateUrls = !seperateUrls;
-        if (!seperateUrls) {
-            frame.src = frameUrl;
-        }
+  var widgetSize = {
+    width: '200px',
+    height: '200px'
+  };
+  var fullSize = {
+    height: '400px',
+    width: '100%'
+  };
+  var frameUrl = 'frame.html';
+  var fullFrame = true;
+  var seperateUrls = false;
+  var frame = document.getElementById('frame');
+  var childMessageBox = document.getElementById('receivedmsgchild');
+
+  function toggleCase() {
+    seperateUrls = !seperateUrls;
+    if (!seperateUrls) {
+      frame.src = frameUrl;
+    }
+  }
+
+  function toggleFrame() {
+    var toggleSize = fullSize;
+    if (fullFrame) {
+      toggleSize = widgetSize;
     }
 
-    function toggleFrame() {
-        var toggleSize = fullSize;
-        if (fullFrame) {
-            toggleSize = widgetSize;
-        }
-
-        if (seperateUrls) {
-            loadCorrectUrl();
-        }
-
-        fullFrame = !fullFrame;
-        frame.style.height = toggleSize.height;
-        frame.style.width = toggleSize.width;
-
+    if (seperateUrls) {
+      loadCorrectUrl();
     }
 
-    function loadCorrectUrl() {
-        var urlSmall = document.getElementById('urlsmall').value;
-        var urlBig = document.getElementById('urlbig').value;
+    fullFrame = !fullFrame;
+    frame.style.height = toggleSize.height;
+    frame.style.width = toggleSize.width;
 
-        console.log(urlSmall, urlBig);
-        var toLoadUrl = urlBig;
-        if (!fullFrame) {
-            toLoadUrl = urlSmall;
-        }
-        frame.src = toLoadUrl;
+  }
+
+  function loadCorrectUrl() {
+    var urlSmall = document.getElementById('urlsmall').value;
+    var urlBig = document.getElementById('urlbig').value;
+
+    console.log(urlSmall, urlBig);
+    var toLoadUrl = urlBig;
+    if (fullFrame) {
+      toLoadUrl = urlSmall;
     }
+    frame.loadURL(toLoadUrl);
+  }
 
+  ipc.on('broadcast', receiveMessage);
 
-    window.addEventListener("message", receiveMessage, false);
+  function receiveMessage(event, data) {
+    console.log(event, data);
+    childMessageBox.textContent = data;
+  }
 
-    function receiveMessage(event) {
-        childMessageBox.textContent = event.data;
+  function sendMessageToChild() {
+    frame.send('fromMain', 'to child ' + Math.random(1, 999));
+  }
+
+  function manipulateElementInChild() {
+    var el = frame.contentWindow.document.querySelectorAll('[fot-msg-textbox]')[0];
+    if (confirm('Confirm that I can clear this value: "' + el.textContent + '" from the textbox')) {
+      el.textContent = '';
     }
-
-    function sendMessageToChild() {
-        frame.contentWindow.postMessage('hello child!!' + Math.random(1, 999), '*');
-    }
-
-    function manipulateElementInChild() {
-        var el = frame.contentWindow.document.querySelectorAll('[fot-msg-textbox]')[0];
-        if(confirm('Confirm that I can clear this value: "' + el.textContent + '" from the textbox')){
-            el.textContent = '';
-        }
-    }
+  }
 
 </script>
 
