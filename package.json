@@ -6,7 +6,9 @@
   "main": "main.js",
   "license": "MIT",
   "scripts": {
-    "package": "rimraf packages && electron-packager . --out=packages/"
+    "package": "rimraf packages && npm run package:32 && npm run package:64",
+    "package:32": "electron-packager . --out=packages/ --platform=win32 --arch=ia32",
+    "package:64": "electron-packager . --out=packages/ --platform=win32 --arch=x64"
   },
   "dependencies": {},
   "devDependencies": {
